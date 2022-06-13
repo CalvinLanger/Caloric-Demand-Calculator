@@ -38,22 +38,85 @@ const activityLevel = [
   }
 ];
 
+const genders = [
+  {
+    value: 'Male',
+    label: 'Male',
+  },
+  {
+    value: 'Female',
+    label: 'Female'
+  }
+];
+
 function App() {
 
-  let result = "0";
-  const [goal, setGoal] = useState('');
-  const [activity, setActivity] = useState('');
+  let result = 0;
+  const [goal, setGoal] = useState('Keep');
+  const [activity, setActivity] = useState('very-active');
+  const [age, setAge] = useState('30');
+  const [height, setHeight] = useState('185');
+  const [weight, setWeight] = useState('75');
+  const [gender, setGender] = useState('Male');
 
-  const resultHandler = (event) => {
-    console.log(event.target.value);
+
+
+  const ageHandler = (event) => {
+    setAge(event.target.value);
   };
 
-  const selectedGoal = (event) => {
+  const heightHandler = (event) => {
+    setHeight(event.target.value);
+  };
+
+  const weightHandler = (event) => {
+    setWeight(event.target.value);
+  };
+
+  const goalHandler = (event) => {
     setGoal(event.target.value);
   };
 
-  const selectedActivity = (event) => {
+  const activityHandler = (event) => {
     setActivity(event.target.value);
+  };
+
+  const genderHandler = (event) => {
+    setGender(event.target.value);
+  };
+  // Harris - Benedict formula
+  let male_BMR = 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
+  let woman_BMR = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age - 161);
+
+  if (gender === "Female") {
+    if (goal === "Loss") {
+      result = Math.trunc(woman_BMR) - 500;
+    } else if (goal === "Gain") {
+      result = Math.trunc(woman_BMR) + 300;
+    } else {
+      result = Math.trunc(woman_BMR);
+    }
+  } else if (gender === "Male") {
+    if (goal === "Loss") {
+      result = Math.trunc(male_BMR) - 500;
+    } else if (goal === "Gain") {
+      result = Math.trunc(male_BMR) + 300;
+    } else {
+      result = Math.trunc(male_BMR);
+    }
+  }
+  function activityLevelChoosen() {
+    if (activity === "lightly-active") {
+      return result * 1.4;
+    } else if (activity === "moderately-active") {
+      return result * 1.6;
+    } else if (activity === "very-active") {
+      return result * 1.8;
+    } else if (activity === "extra-active") {
+      return result * 2.2;
+    } else {
+      return "error";
+    }
   };
 
   return (
@@ -65,25 +128,39 @@ function App() {
         </div>
         <TextField
           id="age"
+          type="number"
           label="Age"
-          onChange={resultHandler}
-          variant="standard" />
-        <TextField
-          id="height"
-          label="Height"
-          onChange={resultHandler}
-          variant="standard" />
-        <TextField
-          id="weight"
-          label="Weight"
-          onChange={resultHandler}
-          variant="standard" />
+          value={age}
+          onChange={ageHandler}
+          InputProps={{ inputProps: { min: 0 } }}
+          variant="standard"
+        />
 
         <TextField
-          id="selectGoal"
+          id="height"
+          type="number"
+          label="Height"
+          value={height}
+          onChange={heightHandler}
+          InputProps={{ inputProps: { min: 0 } }}
+          variant="standard"
+        />
+
+        <TextField
+          id="weight"
+          type="number"
+          label="Weight"
+          value={weight}
+          onChange={weightHandler}
+          InputProps={{ inputProps: { min: 0 } }}
+          variant="standard"
+        />
+
+        <TextField
+          id="goal"
           select
           value={goal}
-          onChange={selectedGoal}
+          onChange={goalHandler}
           label="Goal"
           variant="standard"
         >
@@ -95,14 +172,29 @@ function App() {
         </TextField>
 
         <TextField
-          id="selectActivity"
+          id="activity"
           select
           value={activity}
-          onChange={selectedActivity}
+          onChange={activityHandler}
           label="Activity Level"
           variant="standard"
         >
           {activityLevel.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          id="gender"
+          select
+          value={gender}
+          onChange={genderHandler}
+          label="Gender"
+          variant="standard"
+        >
+          {genders.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>

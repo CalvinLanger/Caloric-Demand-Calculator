@@ -21,12 +21,13 @@
   align-items: center;
 }
 
+/* Card with input data && result of equation */
 .input-card{
   margin: 0 auto;
   max-width: 500px;
   padding: 0 2.8rem;
   display: grid;
-  height: 600px;
+  min-height: 600px;
 }
 
 .title-card{
@@ -43,7 +44,7 @@
 }
 
 .result-board{
-  margin: 2rem auto 3rem;
+  margin: 2rem auto;
   padding: 2rem 4rem;
   border: 1px solid;
   border-radius: 0.5rem;
