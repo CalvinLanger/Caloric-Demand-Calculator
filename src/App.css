@@ -39,13 +39,21 @@
   color: #008ccc;
 }
 
-.title-card p{
+.title-card p, .alert{
   color: #6f6f6f;
 }
 
 .result-board{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2rem auto;
-  padding: 2rem 4rem;
+  padding: 2rem 3.4rem;
   border: 1px solid;
   border-radius: 0.5rem;
+  width: 200px;
+}
+
+.alert{
+  margin: 0 auto 2rem;
 }

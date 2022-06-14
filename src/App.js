@@ -52,12 +52,12 @@ const genders = [
 function App() {
 
   let result = 0;
-  const [goal, setGoal] = useState('Keep');
-  const [activity, setActivity] = useState('very-active');
-  const [age, setAge] = useState('30');
-  const [height, setHeight] = useState('185');
-  const [weight, setWeight] = useState('75');
-  const [gender, setGender] = useState('Male');
+  const [goal, setGoal] = useState('');
+  const [activity, setActivity] = useState('');
+  const [age, setAge] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [gender, setGender] = useState('');
 
 
 
@@ -90,32 +90,30 @@ function App() {
 
   if (gender === "Female") {
     if (goal === "Loss") {
-      result = Math.trunc(woman_BMR) - 500;
+      activityLevelChoosen(woman_BMR, -500);
     } else if (goal === "Gain") {
-      result = Math.trunc(woman_BMR) + 300;
+      activityLevelChoosen(woman_BMR, 300);
     } else {
-      result = Math.trunc(woman_BMR);
+      activityLevelChoosen(woman_BMR, 0);
     }
   } else if (gender === "Male") {
     if (goal === "Loss") {
-      result = Math.trunc(male_BMR) - 500;
+      activityLevelChoosen(male_BMR, -500);
     } else if (goal === "Gain") {
-      result = Math.trunc(male_BMR) + 300;
+      activityLevelChoosen(male_BMR, 300);
     } else {
-      result = Math.trunc(male_BMR);
+      activityLevelChoosen(male_BMR, 0);
     }
   }
-  function activityLevelChoosen() {
+  function activityLevelChoosen(genderBMR, goal) {
     if (activity === "lightly-active") {
-      return result * 1.4;
+      result = Math.trunc(genderBMR * 1.4 + goal);
     } else if (activity === "moderately-active") {
-      return result * 1.6;
+      result = Math.trunc(genderBMR * 1.6 + goal);
     } else if (activity === "very-active") {
-      return result * 1.8;
+      result = Math.trunc(genderBMR * 1.8 + goal);
     } else if (activity === "extra-active") {
-      return result * 2.2;
-    } else {
-      return "error";
+      result = Math.trunc(genderBMR * 2.2 + goal);
     }
   };
 
@@ -132,7 +130,7 @@ function App() {
           label="Age"
           value={age}
           onChange={ageHandler}
-          InputProps={{ inputProps: { min: 0 } }}
+          InputProps={{ inputProps: { min: 0, max: 140 } }}
           variant="standard"
         />
 
@@ -142,7 +140,7 @@ function App() {
           label="Height"
           value={height}
           onChange={heightHandler}
-          InputProps={{ inputProps: { min: 0 } }}
+          InputProps={{ inputProps: { min: 0, max: 300 } }}
           variant="standard"
         />
 
@@ -152,7 +150,7 @@ function App() {
           label="Weight"
           value={weight}
           onChange={weightHandler}
-          InputProps={{ inputProps: { min: 0 } }}
+          InputProps={{ inputProps: { min: 0, max: 600 } }}
           variant="standard"
         />
 
@@ -200,7 +198,10 @@ function App() {
             </MenuItem>
           ))}
         </TextField>
-        <div id="result" className="result-board">{result} kcal</div>
+        <div id="result" className="result-board">
+          {result} kcal
+        </div>
+        <p className="alert">Fill in all data!</p>
       </Card>
     </div >
   );
