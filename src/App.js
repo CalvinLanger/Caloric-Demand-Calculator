@@ -131,6 +131,7 @@ function App() {
           value={age}
           onChange={ageHandler}
           InputProps={{ inputProps: { min: 0, max: 140 } }}
+          // The oldest person ever. Jeanne Calment(1875-1997) lived to the age 122 and 164 days
           variant="standard"
         />
 
@@ -141,6 +142,7 @@ function App() {
           value={height}
           onChange={heightHandler}
           InputProps={{ inputProps: { min: 0, max: 300 } }}
+          // The heighest person ever know as Alton Giant - Robert Wadlow(1918-1940) 2.72cm
           variant="standard"
         />
 
@@ -151,6 +153,7 @@ function App() {
           value={weight}
           onChange={weightHandler}
           InputProps={{ inputProps: { min: 0, max: 600 } }}
+          // The heavest man Jon Brower Minnoch(1941-1983) recorded weighing 635kg
           variant="standard"
         />
 
