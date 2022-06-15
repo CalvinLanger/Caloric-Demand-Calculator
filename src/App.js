@@ -52,6 +52,9 @@ const genders = [
 function App() {
 
   let result = 0;
+  let alert = "Fill in all data!";
+  const toGain = 300;
+  const toLoss = 500;
   const [goal, setGoal] = useState('');
   const [activity, setActivity] = useState('');
   const [age, setAge] = useState('');
@@ -59,6 +62,9 @@ function App() {
   const [weight, setWeight] = useState('');
   const [gender, setGender] = useState('');
 
+  // Basal BMR formula 
+  let male_BMR = 88 + (13.4 * weight) + (4.7 * height) - (5.6 * age);
+  let woman_BMR = 447 + (9.2 * weight) + (3 * height) - (4.3 * age - 161);
 
 
   const ageHandler = (event) => {
@@ -84,25 +90,23 @@ function App() {
   const genderHandler = (event) => {
     setGender(event.target.value);
   };
-  // Harris - Benedict formula
-  let male_BMR = 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
-  let woman_BMR = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age - 161);
+
 
   if (gender === "Female") {
     if (goal === "Loss") {
-      activityLevelChoosen(woman_BMR, -500);
+      activityLevelChoosen(woman_BMR, -toLoss);
     } else if (goal === "Gain") {
-      activityLevelChoosen(woman_BMR, 300);
+      activityLevelChoosen(woman_BMR, toGain);
     } else {
-      activityLevelChoosen(woman_BMR, 0);
+      activityLevelChoosen(woman_BMR, null);
     }
   } else if (gender === "Male") {
     if (goal === "Loss") {
-      activityLevelChoosen(male_BMR, -500);
+      activityLevelChoosen(male_BMR, -toLoss);
     } else if (goal === "Gain") {
-      activityLevelChoosen(male_BMR, 300);
+      activityLevelChoosen(male_BMR, toGain);
     } else {
-      activityLevelChoosen(male_BMR, 0);
+      activityLevelChoosen(male_BMR, null);
     }
   }
   function activityLevelChoosen(genderBMR, goal) {
@@ -153,7 +157,7 @@ function App() {
           value={weight}
           onChange={weightHandler}
           InputProps={{ inputProps: { min: 0, max: 600 } }}
-          // The heavest man Jon Brower Minnoch(1941-1983) recorded weighing 635kg
+          // The heavest man ever Jon Brower Minnoch(1941-1983) recorded weighing 635kg
           variant="standard"
         />
 
@@ -202,10 +206,11 @@ function App() {
           ))}
         </TextField>
         <div id="result" className="result-board">
-          {result} kcal
+          <div className="result-score">{result}</div>
+          <div className="result-score__title">Calories Per Day</div>
         </div>
-        <p className="alert">Fill in all data!</p>
-      </Card>
+        <p className="alert">{alert}</p>
+      </Card >
     </div >
   );
 }

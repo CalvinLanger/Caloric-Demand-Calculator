@@ -31,7 +31,7 @@
 }
 
 .title-card{
-  margin: 1.2rem 0 0;
+  margin: 1.8rem 0 0;
 }
 
 .title-card h2{
@@ -39,7 +39,9 @@
   color: #008ccc;
 }
 
-.title-card p, .alert{
+.title-card p,
+.alert, 
+.result-score__title{
   color: #6f6f6f;
 }
 
@@ -47,11 +49,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
-  padding: 2rem 3.4rem;
+  flex-direction: column;
+
+  margin: 1rem auto;
+  padding: 1.4rem 3.4rem;
   border: 1px solid;
   border-radius: 0.5rem;
-  width: 200px;
+  width: 240px;
+}
+
+.result-score{
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.result-score__title{
+  font-size: 0.8rem;
 }
 
 .alert{
