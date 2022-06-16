@@ -6,9 +6,12 @@
 }
 
 .container{
-  background-color: rgb(217, 85, 80);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #1E5F74;
   height: 100vh;
-  padding: 5rem 0;
+  padding: 2rem;
 }
 
 .grid{
@@ -23,7 +26,6 @@
 
 /* Card with input data && result of equation */
 .input-card{
-  margin: 0 auto;
   max-width: 500px;
   padding: 0 2.8rem;
   display: grid;
@@ -51,7 +53,7 @@
   align-items: center;
   flex-direction: column;
 
-  margin: 1rem auto;
+  margin: 1rem auto 1.6rem;
   padding: 1.4rem 3.4rem;
   border: 1px solid;
   border-radius: 0.5rem;
@@ -67,6 +69,19 @@
   font-size: 0.8rem;
 }
 
-.alert{
-  margin: 0 auto 2rem;
+.menu-button{
+  position: absolute;
+  top: 90%;
+  right: 3%;
+}
+
+/* FOOTER */
+.footer{
+  display: grid;
+  justify-content: left;
+  align-self: center;
+  
+  padding: 2rem;
+  background-color: #133B5C;
+  color: #fff;
 }
