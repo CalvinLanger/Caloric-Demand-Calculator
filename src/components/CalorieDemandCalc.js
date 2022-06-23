@@ -65,17 +65,23 @@ function CalorieDemandCalc() {
     let male_BMR = 88 + (13.4 * weight) + (4.7 * height) - (5.6 * age);
     let woman_BMR = 447 + (9.2 * weight) + (3 * height) - (4.3 * age - 161);
 
+    function validateAndRun(event, min, max, setter) {
+        let value = event.target.value;
+        if (value >= min && value <= max) {
+            setter(value);
+        }
+    }
 
     const ageHandler = (event) => {
-        setAge(event.target.value);
+        validateAndRun(event, 0, 140, setAge);
     };
 
     const heightHandler = (event) => {
-        setHeight(event.target.value);
+        validateAndRun(event, 35, 300, setHeight);
     };
 
     const weightHandler = (event) => {
-        setWeight(event.target.value);
+        validateAndRun(event, 2, 600, setWeight);
     };
 
     const goalHandler = (event) => {

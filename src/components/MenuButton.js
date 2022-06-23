@@ -5,7 +5,7 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 
 function MenuButton() {
     return (
-        <Fab variant="extended" size="medium" color="primary" aria-label="add" sx={{ width: '10rem' }}>
+        <Fab variant="extended" size="medium" color="primary" aria-label="add" sx={{ width: '8rem' }}>
             <NavigationIcon sx={{ mr: 1 }} />
             Menu
         </Fab>

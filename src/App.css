@@ -30,6 +30,7 @@
   padding: 0 2.8rem;
   display: grid;
   min-height: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
 .title-card{
@@ -78,8 +79,8 @@
 /* FOOTER */
 .footer{
   display: grid;
-  justify-content: left;
-  align-self: center;
+  justify-items: center;
+  align-items: center;
   
   padding: 2rem;
   background-color: #133B5C;
