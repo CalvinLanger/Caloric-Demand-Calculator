@@ -6,7 +6,7 @@ function Footer() {
 
     return (
         <div className="footer">
-            <div className="copyright">&copy; Copyright {year} Abstergo.inc - Made by Calvin Langer
+            <div className="copyright"> Copyright &copy; {year} Abstergo.inc - Made by Bartlomiej Langer
             </div>
         </div>
     );

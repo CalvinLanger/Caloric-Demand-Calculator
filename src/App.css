@@ -3,15 +3,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  letter-spacing: 0.5px;
+}
+
+.wrapper{
+  display: block;
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .container{
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background-color: #1E5F74;
-  height: 100vh;
-  padding: 2rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .grid{
@@ -20,69 +23,115 @@
 
 .grid-col-1{
   display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
-  align-items: center;
 }
 
-/* Card with input data && result of equation */
-.input-card{
-  max-width: 500px;
-  padding: 0 2.8rem;
+.grid-col-2{
   display: grid;
-  min-height: 600px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.title-card{
-  margin: 1.8rem 0 0;
+.grid-col-4{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.4rem;
 }
 
-.title-card h2{
-  margin-bottom: 0.4rem;
-  color: #008ccc;
-}
-
-.title-card p,
-.alert, 
-.result-score__title{
-  color: #6f6f6f;
-}
-
-.result-board{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  margin: 1rem auto 1.6rem;
-  padding: 1.4rem 3.4rem;
-  border: 1px solid;
-  border-radius: 0.5rem;
-  width: 240px;
-}
-
-.result-score{
-  font-size: 1.8rem;
+.subpage-title{
+  padding-top: 60px;
+  padding-bottom: 30px;
+  background-color: #212120;
+  color: #fff;
+  font-size: 80px;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
-.result-score__title{
+.subtitle p{
+  padding: 10rem;
+  text-align: center;
+  font-size: 22px;
+}
+
+label{
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+input,
+select,
+button,
+.output{
+  padding: 0.8rem 1rem;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+input, 
+.output{
+  border-color: #dedcdc;
+}
+
+input{
+  border-width: 0 0 1px;
+}
+
+select{
+  background-color: #dedcdc;
+  border: 1px solid #dedcdc;
+}
+
+.output{
+  background-color: #eeeeee;
+  border: 1px solid #eeeeee;
+}
+
+button{
+  background-color: #fff;
+  border: 1px solid #58C4A7;
+  color: #58C4A7;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.data-info{
+  text-align: center;
+  font-size: 0.8rem
+}
+
+form{
+  border-bottom: 1px solid #eeeeee;
+}
+
+.content-info h1{
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #58C4A7;
+  font-weight: 500;
+  font-size: 2.6rem;
+}
+
+.content-info p{
+letter-spacing: 0.2px;
+line-height: 1.6rem;
+}
+
+.content-info,
+.data-info{
+  margin: 7rem 0;
+}
+
+.footer{
+  letter-spacing: 1.2px;
+  text-align: center;
+  padding: 5rem;
+  background-color: #eeeeee;
   font-size: 0.8rem;
 }
 
-.menu-button{
-  position: absolute;
-  top: 90%;
-  right: 3%;
-}
 
-/* FOOTER */
-.footer{
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  
-  padding: 2rem;
-  background-color: #133B5C;
-  color: #fff;
-}
