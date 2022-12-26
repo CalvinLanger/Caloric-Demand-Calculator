@@ -5,10 +5,7 @@ import './MediaQuerys.css';
 import InputData from './components/InputData';
 import Footer from './components/Footer';
 import OutputBox from './components/OutoputBox';
-
-// BASAL BMR FORMULA
-// let man_BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-// let woman_BMR = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+import MacroDemand from './components/MacroDemand';
 
 const genderOptions = [
   {
@@ -23,33 +20,36 @@ const genderOptions = [
 
 const activityOptions = [
   {
-    value: 'sitting',
-    label: 'Sitting'
+    value: 'lightly-active',
+    label: 'Lightly active'
   },
   {
-    value: 'standing',
-    label: 'Standing'
+    value: 'moderately-active',
+    label: 'Moderately active'
   },
   {
-    value: 'physical',
-    label: 'Physical'
+    value: 'very-active',
+    label: 'Active'
+  },
+  {
+    value: 'extra-active',
+    label: 'Very active'
   }
 ];
 
 function App() {
 
-  const [gender, setGender] = useState();
-  const [activity, setActivity] = useState();
-  const [weight, setWeight] = useState();
-  const [height, setHeight] = useState();
-  const [age, setAge] = useState();
+  let restingMetabolism, dailyMetabolism, totalMetabolism;
+
+  const [gender, setGender] = useState("male");
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [age, setAge] = useState('');
+  const [activity, setActivity] = useState("lightly-active");
+  const [dailySteps, setDailySteps] = useState('');
 
   function handleGender(event) {
     setGender(event.target.value);
-  }
-
-  function handleActivity(event) {
-    setActivity(event.target.value);
   }
 
   function handleWeight(event) {
@@ -63,7 +63,45 @@ function App() {
   function handleAge(event) {
     setAge(event.target.value);
   }
+  function handleActivity(event) {
+    setActivity(event.target.value);
+  }
 
+  function handleSteps(event) {
+    setDailySteps(event.target.value);
+  }
+
+  // BASAL BMR FOR WOMAN AND MAN
+  let men_BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+  let woman_BMR = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+
+  // LEVEL OF ACTIVITY
+  function handleActiveMetabolism(dailySteps) {
+    dailySteps = dailySteps * 0.04;
+    if (activity === "lightly-active") {
+      dailyMetabolism = restingMetabolism * 1.2;
+      totalMetabolism = dailyMetabolism + dailySteps;
+    } else if (activity === "moderately-active") {
+      dailyMetabolism = restingMetabolism * 1.4;
+      totalMetabolism = dailyMetabolism + dailySteps;
+    } else if (activity === "very-active") {
+      dailyMetabolism = restingMetabolism * 1.6;
+      totalMetabolism = dailyMetabolism + dailySteps;
+    } else if (activity === "extra-active") {
+      dailyMetabolism = restingMetabolism * 1.8;
+      totalMetabolism = dailyMetabolism + dailySteps;
+    }
+  }
+
+  if (gender === "male") {
+    restingMetabolism = men_BMR;
+    totalMetabolism = restingMetabolism;
+  } else if (gender === "female") {
+    restingMetabolism = woman_BMR;
+    totalMetabolism = restingMetabolism;
+  }
+
+  handleActiveMetabolism(dailySteps);
 
   return (
     <div className='wrapper'>
@@ -86,13 +124,13 @@ function App() {
               </select>
 
             </div>
-            <InputData labelName="Weight:" id="weight" for="weight" value={weight} onChange={handleWeight} />
-            <InputData labelName="Height:" id="height" for="height" value={height} onChange={handleHeight} />
-            <InputData labelName="Age:" id="age" for="age" value={age} onChange={handleAge} />
+            <InputData labelName="Weight:" id="weight" for="weight" value={weight} onChangeHandler={handleWeight} />
+            <InputData labelName="Height:" id="height" for="height" value={height} onChangeHandler={handleHeight} />
+            <InputData labelName="Age:" id="age" for="age" value={age} onChangeHandler={handleAge} />
           </div>
 
           <div className='grid-col-4'>
-            <OutputBox labelName='Resting metabolism:' />
+            <OutputBox labelName='Resting metabolism:' result={Math.trunc(restingMetabolism)} />
             <div className='grid'>
               <label>Work performed:</label>
               <select value={activity} onChange={handleActivity}>
@@ -103,16 +141,21 @@ function App() {
                 ))}
               </select>
             </div>
-            <OutputBox labelName='Daily metabolism:' />
-            <InputData labelName="Daily steps(km):" id="steps" for="steps" />
+            <OutputBox labelName='Daily metabolism:' result={Math.trunc(dailyMetabolism)} />
+            <InputData labelName="Daily steps(km):" id="steps" for="steps" value={dailySteps} onChangeHandler={handleSteps} />
           </div>
 
           <div className='grid-col-4'>
-            <OutputBox labelName='Total metabolism:' />
+            <OutputBox labelName='Total metabolism:' result={Math.trunc(totalMetabolism)} />
             <div className='grid'>
               <label className='hidden'>hidden</label>
               <button>Calculate</button>
             </div>
+          </div>
+          <div className='makro-table'>
+            <MacroDemand />
+            <MacroDemand />
+            <MacroDemand />
           </div>
           <p className='data-info'>All sent data is saved in the system only for communication purposes, this information will never be shared with a third party</p>
         </form >

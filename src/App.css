@@ -133,6 +133,31 @@ line-height: 1.6rem;
   margin: 7rem 0;
 }
 
+.table-title{
+  margin-bottom: 10px;
+}
+
+.makro-table{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.table-section{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 2px 0;
+  border-bottom: 1px solid #d1caca;
+}
+
+.table-equation{
+  margin: 0 2rem;
+}
+
+.table-unit{
+  text-align: center;
+}
+
 .footer{
   display: flex;
   justify-content: space-between;
