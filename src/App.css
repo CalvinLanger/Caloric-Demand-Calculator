@@ -1,4 +1,18 @@
 
+/* Remove Arrows/Spinners form inputfields */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: auto;
+}
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -74,6 +88,10 @@ button,
   letter-spacing: 0;
 }
 
+select, .output {
+  border-radius: 5px;
+}
+
 input, 
 .output{
   border-color: #dedcdc;
@@ -109,7 +127,7 @@ button{
   font-size: 0.8rem
 }
 
-form{
+.form{
   padding-top: 4rem;
   border-top: 1px solid #58C4A7;
   border-bottom: 1px solid #eeeeee;
@@ -148,10 +166,11 @@ line-height: 1.6rem;
   grid-template-columns: repeat(5, 1fr);
   margin: 2px 0;
   border-bottom: 1px solid #d1caca;
+  width: 438px;
 }
 
 .table-equation{
-  margin: 0 2rem;
+  margin: 0 25px;
 }
 
 .table-unit{
