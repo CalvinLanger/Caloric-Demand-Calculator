@@ -44,6 +44,7 @@ function App() {
   let totalCarboGain, totalProteinGain, totalFatGain, totalCarboInGramsGain, totalProteinInGramsGain, totalFatInGramsGain;
   let totalCarboLoose, totalProteinLoose, totalFatLoose, totalCarboInGramsLoose, totalProteinInGramsLoose, totalFatInGramsLoose;
 
+
   const [gender, setGender] = useState('male');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -101,23 +102,29 @@ function App() {
     totalFat = Math.round((totalMetabolism * 0.25));
     totalFatInGrams = Math.round(totalProtein / 4);
 
-    totalCarboGain = Math.round(((totalMetabolism + 500) * 0.5));
+    totalCarboGain = Math.round(((totalMetabolism + 300) * 0.5));
     totalCarboInGramsGain = Math.round(totalCarbo / 9);
 
-    totalProteinGain = Math.round(((totalMetabolism + 500) * 0.25));
+    totalProteinGain = Math.round(((totalMetabolism + 300) * 0.25));
     totalProteinInGramsGain = Math.round(totalProtein / 4);
 
-    totalFatGain = Math.round(((totalMetabolism + 500) * 0.25));
+    totalFatGain = Math.round(((totalMetabolism + 300) * 0.25));
     totalFatInGramsGain = Math.round(totalProtein / 4);
 
-    totalCarboLoose = Math.round(((totalMetabolism - 300) * 0.5));
+    totalCarboLoose = Math.round(((totalMetabolism - 500) * 0.5));
     totalCarboInGramsLoose = Math.round(totalCarbo / 9);
 
-    totalProteinLoose = Math.round(((totalMetabolism - 300) * 0.25));
+    totalProteinLoose = Math.round(((totalMetabolism - 500) * 0.25));
     totalProteinInGramsLoose = Math.round(totalProtein / 4);
 
-    totalFatLoose = Math.round(((totalMetabolism - 300) * 0.25));
+    totalFatLoose = Math.round(((totalMetabolism - 500) * 0.25));
     totalFatInGramsLoose = Math.round(totalProtein / 4);
+
+    if (totalCarboLoose < 0 || totalProteinLoose < 0 || totalFatLoose < 0) {
+      totalCarboLoose = 0;
+      totalProteinLoose = 0;
+      totalFatLoose = 0;
+    }
   }
 
   // BASAL BMR FOR WOMAN AND MAN
@@ -146,11 +153,19 @@ function App() {
   }
 
   if (gender === "male") {
-    restingMetabolism = men_BMR;
-    totalMetabolism = restingMetabolism;
+    if (weight === '' || height === '' || age === '') {
+      restingMetabolism = 0;
+    } else {
+      restingMetabolism = men_BMR;
+      totalMetabolism = restingMetabolism;
+    }
   } else if (gender === "female") {
-    restingMetabolism = woman_BMR;
-    totalMetabolism = restingMetabolism;
+    if (weight === '' || height === '' || age === '') {
+      restingMetabolism = 0;
+    } else {
+      restingMetabolism = woman_BMR;
+      totalMetabolism = restingMetabolism;
+    }
   }
 
   handleActiveMetabolism(dailySteps);
@@ -202,8 +217,7 @@ function App() {
             <OutputBox labelName='Total metabolism:' result={totalMetabolism} />
             <div className='grid'>
               <label className='hidden'>hidden</label>
-              {/* BUTTON IS DISABLED NOW */}
-              <button onClick={changeMetric}>{metric ? "US metric system" : "International metric system"}</button>
+              <button onClick={changeMetric}>{metric ? "lbs / ft" : "kg / cm"}</button>
             </div>
           </div>
           <div className='makro-table'>
@@ -225,7 +239,7 @@ function App() {
               fatKcal={totalFat}
               fatGrams={totalFatInGrams} />
             <MacroDemand titleName="Loose weight"
-              totalKcal={totalMetabolism - 300 >= 0 ? totalMetabolism - 500 : totalMetabolism = 0}
+              totalKcal={totalMetabolism - 500 < 0 ? totalMetabolism = 0 : totalMetabolism - 500}
               carboKcal={totalCarboLoose}
               carboGrams={totalCarboInGramsLoose}
               proteinKcal={totalProteinLoose}
