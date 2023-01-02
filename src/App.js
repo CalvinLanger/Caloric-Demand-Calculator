@@ -51,7 +51,6 @@ function App() {
   // Metrics unit
   const lbs = 0.453592;
   const ft = 30.48;
-  const inch = 2.54;
 
   const [gender, setGender] = useState('male');
   const [weight, setWeight] = useState('');
@@ -112,39 +111,12 @@ function App() {
     }
   }
 
-  function calcMacro() {
-    totalCarbo = Math.round((totalMetabolism * 0.5));
-    totalCarboInGrams = Math.round(totalCarbo / carbo);
-
-    totalProtein = Math.round((totalMetabolism * 0.25));
-    totalProteinInGrams = Math.round(totalProtein / protein);
-
-    totalFat = Math.round((totalMetabolism * 0.25));
-    totalFatInGrams = Math.round(totalProtein / fat);
-
-    totalCarboGain = Math.round((totalMetabolismGain * 0.5));
-    totalCarboInGramsGain = Math.round(totalCarboGain / carbo);
-
-    totalProteinGain = Math.round((totalMetabolismGain * 0.25));
-    totalProteinInGramsGain = Math.round(totalProteinGain / protein);
-
-    totalFatGain = Math.round((totalMetabolismGain * 0.25));
-    totalFatInGramsGain = Math.round(totalProteinGain / fat);
-
-    totalCarboLoose = Math.round((totalMetabolismLoose * 0.5));
-    totalCarboInGramsLoose = Math.round(totalCarboLoose / carbo);
-
-    totalProteinLoose = Math.round((totalMetabolismLoose * 0.25));
-    totalProteinInGramsLoose = Math.round(totalProteinLoose / protein);
-
-    totalFatLoose = Math.round((totalMetabolismLoose * 0.25));
-    totalFatInGramsLoose = Math.round(totalProteinLoose / fat);
-
-    // if (totalMetabolismLoose <= 0 || totalCarboLoose <= 0 || totalProteinLoose <= 0 || totalFatLoose <= 0) {
-    //   totalCarboLoose = 0;
-    //   totalProteinLoose = 0;
-    //   totalFatLoose = 0;
-    // }
+  function inputValueEmpty() {
+    if (weight === '' || height === '' || age === '') {
+      restingMetabolism = dailyMetabolism = totalMetabolism = totalMetabolismGain = totalMetabolismLoose = 0;
+      totalCarbo = totalProtein = totalFat = totalCarboInGrams = totalProteinInGrams = totalFatInGrams = 0;
+      totalCarboGain = totalProteinGain = totalFatGain = totalCarboInGramsGain = totalProteinInGramsGain = totalFatInGramsGain = 0;
+    }
   }
 
   // BASAL BMR FOR WOMAN AND MAN
@@ -174,30 +146,51 @@ function App() {
     totalMetabolismLoose = Math.round(totalMetabolism - 500);
   }
 
-  if (gender === "male") {
-    if (weight === '' || height === '' || age === '') {
-      restingMetabolism = 0;
-      totalMetabolismGain = 0;
-      totalMetabolismLoose = 0;
-    } else {
-      restingMetabolism = men_BMR;
-      totalMetabolism = restingMetabolism;
-    }
-  } else if (gender === "female") {
-    if (weight === '' || height === '' || age === '') {
-      restingMetabolism = 0;
-      totalMetabolismGain = 0;
-      totalMetabolismLoose = 0;
-    } else {
-      restingMetabolism = woman_BMR;
-      totalMetabolism = restingMetabolism;
-    }
+  function calcMacro() {
+    totalCarbo = Math.round((totalMetabolism * 0.5));
+    totalCarboInGrams = Math.round(totalCarbo / carbo);
 
+    totalProtein = Math.round((totalMetabolism * 0.25));
+    totalProteinInGrams = Math.round(totalProtein / protein);
+
+    totalFat = Math.round((totalMetabolism * 0.25));
+    totalFatInGrams = Math.round(totalProtein / fat);
+
+    totalCarboGain = Math.round((totalMetabolismGain * 0.5));
+    totalCarboInGramsGain = Math.round(totalCarboGain / carbo);
+
+    totalProteinGain = Math.round((totalMetabolismGain * 0.25));
+    totalProteinInGramsGain = Math.round(totalProteinGain / protein);
+
+    totalFatGain = Math.round((totalMetabolismGain * 0.25));
+    totalFatInGramsGain = Math.round(totalProteinGain / fat);
+
+    totalCarboLoose = Math.round((totalMetabolismLoose * 0.5));
+    totalCarboInGramsLoose = Math.round(totalCarboLoose / carbo);
+
+    totalProteinLoose = Math.round((totalMetabolismLoose * 0.25));
+    totalProteinInGramsLoose = Math.round(totalProteinLoose / protein);
+
+    totalFatLoose = Math.round((totalMetabolismLoose * 0.25));
+    totalFatInGramsLoose = Math.round(totalProteinLoose / fat);
   }
 
-  handleActiveMetabolism(dailySteps);
-  calcMacro();
-  preventNegativeValue();
+  if (gender === "male") {
+    restingMetabolism = men_BMR;
+    totalMetabolism = restingMetabolism;
+    handleActiveMetabolism(dailySteps);
+    calcMacro();
+    inputValueEmpty();
+    preventNegativeValue();
+  } else if (gender === "female") {
+    restingMetabolism = woman_BMR;
+    totalMetabolism = restingMetabolism;
+    handleActiveMetabolism(dailySteps);
+    calcMacro();
+    inputValueEmpty();
+    preventNegativeValue();
+  }
+
 
   return (
     <div className='wrapper'>
