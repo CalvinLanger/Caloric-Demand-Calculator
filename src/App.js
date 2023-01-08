@@ -43,14 +43,12 @@ function App() {
   let totalCarbo, totalProtein, totalFat, totalCarboInGrams, totalProteinInGrams, totalFatInGrams;
   let totalCarboGain, totalProteinGain, totalFatGain, totalCarboInGramsGain, totalProteinInGramsGain, totalFatInGramsGain;
   let totalCarboLoose, totalProteinLoose, totalFatLoose, totalCarboInGramsLoose, totalProteinInGramsLoose, totalFatInGramsLoose;
+  let currentWeight, currentHeight;
 
   // Calories in macroelemets
   const protein = 4;
   const carbo = 4;
   const fat = 9;
-  // Metrics unit
-  const lbs = 0.453592;
-  const ft = 30.48;
 
   const [gender, setGender] = useState('male');
   const [weight, setWeight] = useState('');
@@ -59,6 +57,10 @@ function App() {
   const [activity, setActivity] = useState("lightly-active");
   const [dailySteps, setDailySteps] = useState('');
   const [metric, setMetric] = useState(true);
+
+  // Metrics unit
+  let lbs = weight * 2.205;
+  let feet = height / 30.48;
 
   function handleGender(event) {
     setGender(event.target.value);
@@ -120,7 +122,15 @@ function App() {
   }
 
   // BASAL BMR FOR WOMAN AND MAN
-  let men_BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+  if (metric === true) {
+    currentWeight = weight;
+    currentHeight = height;
+  } else {
+    currentWeight = lbs;
+    currentHeight = feet;
+  }
+
+  let men_BMR = 88.362 + (13.397 * currentWeight) + (4.799 * currentHeight) - (5.677 * age);
   let woman_BMR = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
 
   // LEVEL OF ACTIVITY
