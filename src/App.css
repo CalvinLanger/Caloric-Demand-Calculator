@@ -1,3 +1,11 @@
+/* COLORS */
+:root {
+  --light-grey: #eeeeee;
+  --medium-grey: #dedcdc;
+  --darker-grey: #e1dede;
+
+  --light-green: #58C4A7;
+}
 
 /* Remove Arrows/Spinners form inputfields */
 /* Chrome, Safari, Edge, Opera */
@@ -17,101 +25,102 @@ input[type=number] {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  letter-spacing: 0.5px;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow: -moz-hidden-unscrollable;
+}
+
+/* ALL PAGE CONTAINER */
 .wrapper{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  display: grid;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.container{
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.grid{
-  display: grid;
-}
-
-.grid-col-1{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-.grid-col-2{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-col-4{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-bottom: 2.4rem;
-}
-
+/* TOP-BAR TITLE */
 .subpage-title{
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 1rem 2rem;
   background-color: #212120;
   color: #fff;
   font-size: 80px;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0;
   width: 100%;
 }
 
+/* WELCOME SUBTITLE */
 .subtitle p{
   padding: 10rem;
   text-align: center;
   font-size: 22px;
+  border-bottom: 1px solid var(--medium-grey);
+  margin-bottom: 5rem;
+  letter-spacing: 0.5px;
 }
 
-label{
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
+/* SECTION DATA-INPUT */
+.section-data {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1.5rem;
+  gap: 2rem;
+  width: 100%;
+
+/* TEMPORARY MARGINA */
+  margin-bottom: 8rem;
+}
+
+.gender-select,
+.input-data,
+.output-box,
+.work-performed {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
 input,
 select,
-button,
-.output{
+button {
   padding: 0.8rem 1rem;
   font-size: 18px;
   letter-spacing: 0;
+  width: 100%;
 }
 
-select, .output {
+select {
   border-radius: 5px;
+  border: 1px solid var(--darker-grey);
+  background-color: var(--darker-grey);
 }
 
-input, 
-.output{
-  border-color: #dedcdc;
+label{
+  font-size: 1.2rem;
 }
 
-input{
+input {
+  border-color: var(--medium-grey);
   border-width: 0 0 1px;
 }
 
-select{
-  border: 1px solid #e1dede;
-  background-color: #e1dede;
+.output{
+  background-color: var(--light-grey);
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  padding: 0.8rem 1rem;
 }
 
-.output{
-  background-color: #eeeeee;
-  border: 1px solid #eeeeee;
-}
+
+
+
+
+
+
+
 
 button{
   background-color: #fff;
@@ -120,19 +129,9 @@ button{
   cursor: pointer;
 }
 
-.hidden{
-  visibility: hidden;
-}
-
 .data-info{
   text-align: center;
   font-size: 0.8rem
-}
-
-.form{
-  padding-top: 4rem;
-  border-top: 1px solid #58C4A7;
-  border-bottom: 1px solid #eeeeee;
 }
 
 .content-info{
