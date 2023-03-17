@@ -7,6 +7,10 @@
   --light-green: #58C4A7;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  float: right;
+ }
+
 /* Remove Arrows/Spinners form inputfields */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -58,7 +62,6 @@ body {
   text-align: center;
   font-size: 22px;
   border-bottom: 1px solid var(--medium-grey);
-  margin-bottom: 5rem;
   letter-spacing: 0.5px;
 }
 
@@ -66,18 +69,16 @@ body {
 .section-data {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 1.5rem;
+  padding: 5rem 1.5rem;
   gap: 2rem;
   width: 100%;
-
-/* TEMPORARY MARGINA */
-  margin-bottom: 8rem;
 }
 
 .gender-select,
 .input-data,
-.output-box,
-.work-performed {
+.output-data,
+.work-performed,
+.btn-metric {
   display: grid;
   gap: 10px;
   margin-bottom: 1rem;
@@ -90,6 +91,7 @@ button {
   font-size: 18px;
   letter-spacing: 0;
   width: 100%;
+  cursor: pointer;
 }
 
 select {
@@ -114,20 +116,35 @@ input {
   padding: 0.8rem 1rem;
 }
 
-
-
-
-
-
-
-
-
 button{
   background-color: #fff;
   border: 1px solid #58C4A7;
   color: #58C4A7;
-  cursor: pointer;
 }
+
+/* MACROELEMENTS OUTPUT */
+.section-macro {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0.5rem 1.5rem 5rem;
+  width: 100%;
+}
+
+.macro-col-1 {
+  display: grid;
+  justify-content: center;
+}
+
+.macro-col-2 {
+  display: grid;
+  justify-content: center;
+}
+
+
+
+
+
+
 
 .data-info{
   text-align: center;
@@ -183,6 +200,8 @@ line-height: 1.6rem;
   text-align: center;
 }
 
+
+/* FOOTER */
 .footer{
   display: flex;
   justify-content: space-between;

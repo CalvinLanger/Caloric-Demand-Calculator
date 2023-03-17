@@ -4,7 +4,7 @@ import './App.css';
 import './MediaQuerys.css';
 import InputData from './components/InputData';
 import Footer from './components/Footer';
-import OutputBox from './components/OutoputBox';
+import OutputData from './components/OutputData';
 import MacroDemand from './components/MacroDemand';
 import GenderSelect from './components/GenderSelect';
 import WorkPerformed from './components/WorkPerformed';
@@ -34,7 +34,6 @@ function App() {
   // Metrics unit
   let lbs = weight * 2.205;
   let feet = height / 30.48;
-
 
   function handleGenderChange(gender) {
     setSelectedGender(gender);
@@ -97,12 +96,20 @@ function App() {
   }
 
   // BASAL BMR FOR WOMAN AND MAN
+
+  let weightHint = "kg";
+  let heightHint = "cm";
+  let distanceHint = "km";
+
   if (metric === true) {
     currentWeight = weight;
     currentHeight = height;
   } else {
     currentWeight = lbs;
     currentHeight = feet;
+    weightHint = "lbs";
+    heightHint = "feet";
+    distanceHint = "miles";
   }
 
   let men_BMR = 88.362 + (13.397 * currentWeight) + (4.799 * currentHeight) - (5.677 * age);
@@ -178,6 +185,7 @@ function App() {
 
 
   return (
+
     <div className='wrapper'>
 
       {/* TOP-BAR TITLE */}
@@ -195,35 +203,42 @@ function App() {
         <GenderSelect onGenderChange={handleGenderChange} />
 
         {/* INPUT DATA ELEMENTS */}
-        <InputData labelName="Weight:" id="weight" value={weight} onChangeHandler={handleWeight} />
-        <InputData labelName="Height:" id="height" value={height} onChangeHandler={handleHeight} />
-        <InputData labelName="Age:" id="age" value={age} onChangeHandler={handleAge} />
+        <InputData labelName="Weight:" id="weight" value={weight} onChangeHandler={handleWeight} placeholder={weightHint} />
+        <InputData labelName="Height:" id="height" value={height} onChangeHandler={handleHeight} placeholder={heightHint} />
+        <InputData labelName="Age:" id="age" value={age} onChangeHandler={handleAge} placeholder="years" />
 
         {/* OUTPUT-INPUT-LABEL */}
-        <OutputBox labelName='Resting metabolism:' result={restingMetabolism} />
+        <OutputData labelName='Resting metabolism:' result={restingMetabolism} />
+
+        {/* ACTIVITY */}
         <WorkPerformed onSelectedActivity={handleSelectedActivity} />
-        <OutputBox labelName='Daily metabolism:' result={dailyMetabolism} />
-        <InputData labelName="Daily steps(km):" id="steps" value={dailySteps} onChangeHandler={handleSteps} />
 
+        {/* OUTPUT-INPUT-LABEL */}
+        <OutputData labelName='Daily metabolism:' result={dailyMetabolism} />
+        <InputData labelName={`Daily steps(${distanceHint}):`} id="steps" value={dailySteps} onChangeHandler={handleSteps} placeholder={distanceHint} />
+        <OutputData labelName='Total metabolism:' result={totalMetabolism} />
 
-        {/* <div className='grid-col-4'>
-          <OutputBox labelName='Total metabolism:' result={totalMetabolism} />
-          <div className='grid'>
-            <label className='hidden'>hidden</label>
-            <button onClick={changeMetric}>{metric ? "lb / ft" : "kg / cm"}</button>
-          </div>
-        </div> */}
-        {/* <div className='makro-table'>
+        {/* CHANGE METRIC */}
+        <div className='btn-metric'>
+          <label>Switch metric: </label>
+          <button onClick={changeMetric}>{metric ? "kg / cm / km" : "lbs / feet / miles"}</button>
+        </div>
+      </div >
+
+      {/* CALCULATE MAKRO */}
+      <div className='section-macro'>
+
+        {/* MACROELEMENTS HINT'S */}
+        <div className='macro-col-1'>
+          <p>Not recommended to take more than +300 kcal for mass gain</p>
+          <p>And less than -500 kcal for loss weight</p>
+
+        </div>
+
+        {/* MACROELEMENTS OUTPUT DATA */}
+        <div className='macro-col-2'>
           <MacroDemand
-            titleName="Gain weight"
-            totalKcal={totalMetabolismGain}
-            carboKcal={totalCarboGain}
-            carboGrams={totalCarboInGramsGain}
-            proteinKcal={totalProteinGain}
-            proteinGrams={totalProteinInGramsGain}
-            fatKcal={totalFatGain}
-            fatGrams={totalFatInGramsGain} />
-          <MacroDemand titleName="Keep weight"
+            titleName="Your Demands:"
             totalKcal={totalMetabolism}
             carboKcal={totalCarbo}
             carboGrams={totalCarboInGrams}
@@ -231,17 +246,39 @@ function App() {
             proteinGrams={totalProteinInGrams}
             fatKcal={totalFat}
             fatGrams={totalFatInGrams} />
-          <MacroDemand titleName="Loose weight"
-            totalKcal={totalMetabolismLoose}
-            carboKcal={totalCarboLoose}
-            carboGrams={totalCarboInGramsLoose}
-            proteinKcal={totalProteinLoose}
-            proteinGrams={totalProteinInGramsLoose}
-            fatKcal={totalFatLoose}
-            fatGrams={totalFatInGramsLoose} />
-        </div> */}
-        {/* <p className='data-info'>All sent data is saved in the system only for communication purposes, this information will never be shared with a third party</p> */}
-      </div >
+        </div>
+
+      </div>
+
+
+      {/* <div className='makro-table'>
+        <MacroDemand
+          titleName="Gain weight"
+          totalKcal={totalMetabolismGain}
+          carboKcal={totalCarboGain}
+          carboGrams={totalCarboInGramsGain}
+          proteinKcal={totalProteinGain}
+          proteinGrams={totalProteinInGramsGain}
+          fatKcal={totalFatGain}
+          fatGrams={totalFatInGramsGain} />
+        <MacroDemand titleName="Keep weight"
+          totalKcal={totalMetabolism}
+          carboKcal={totalCarbo}
+          carboGrams={totalCarboInGrams}
+          proteinKcal={totalProtein}
+          proteinGrams={totalProteinInGrams}
+          fatKcal={totalFat}
+          fatGrams={totalFatInGrams} />
+        <MacroDemand titleName="Loose weight"
+          totalKcal={totalMetabolismLoose}
+          carboKcal={totalCarboLoose}
+          carboGrams={totalCarboInGramsLoose}
+          proteinKcal={totalProteinLoose}
+          proteinGrams={totalProteinInGramsLoose}
+          fatKcal={totalFatLoose}
+          fatGrams={totalFatInGramsLoose} />
+      </div> */}
+      {/* <p className='data-info'>All sent data is saved in the system only for communication purposes, this information will never be shared with a third party</p> */}
 
       {/* <div className='content-info'>
         <h1>CALORIC DEMAND CALCULATOR</h1>
@@ -254,7 +291,7 @@ function App() {
         </p>
       </div> */}
 
-      {/* <Footer /> */}
+      <Footer />
     </div >
   );
 
