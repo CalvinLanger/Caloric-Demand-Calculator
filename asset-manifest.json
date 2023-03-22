@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Caloric-Demand-Calculator/static/css/main.76223b3f.css",
-    "main.js": "/Caloric-Demand-Calculator/static/js/main.b8680062.js",
+    "main.css": "/Caloric-Demand-Calculator/static/css/main.9869c150.css",
+    "main.js": "/Caloric-Demand-Calculator/static/js/main.8c03d534.js",
     "static/js/787.4cf83b80.chunk.js": "/Caloric-Demand-Calculator/static/js/787.4cf83b80.chunk.js",
     "index.html": "/Caloric-Demand-Calculator/index.html",
-    "main.76223b3f.css.map": "/Caloric-Demand-Calculator/static/css/main.76223b3f.css.map",
-    "main.b8680062.js.map": "/Caloric-Demand-Calculator/static/js/main.b8680062.js.map",
+    "main.9869c150.css.map": "/Caloric-Demand-Calculator/static/css/main.9869c150.css.map",
+    "main.8c03d534.js.map": "/Caloric-Demand-Calculator/static/js/main.8c03d534.js.map",
     "787.4cf83b80.chunk.js.map": "/Caloric-Demand-Calculator/static/js/787.4cf83b80.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.76223b3f.css",
-    "static/js/main.b8680062.js"
+    "static/css/main.9869c150.css",
+    "static/js/main.8c03d534.js"
   ]
 }
