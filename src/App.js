@@ -12,28 +12,18 @@ import WorkPerformed from './components/WorkPerformed';
 
 function App() {
 
-  let restingMetabolism, dailyMetabolism, totalMetabolism, totalMetabolismGain, totalMetabolismLoose;
+  let restingMetabolism, dailyMetabolism, totalMetabolism;
   let totalCarbo, totalProtein, totalFat, totalCarboInGrams, totalProteinInGrams, totalFatInGrams;
-  let totalCarboGain, totalProteinGain, totalFatGain, totalCarboInGramsGain, totalProteinInGramsGain, totalFatInGramsGain;
-  let totalCarboLoose, totalProteinLoose, totalFatLoose, totalCarboInGramsLoose, totalProteinInGramsLoose, totalFatInGramsLoose;
-  let currentWeight, currentHeight;
 
-  // Calories in macroelemets
-  const protein = 4;
-  const carbo = 4;
-  const fat = 9;
+  // USE STATE ELEMENTS
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [age, setAge] = useState('');
-  const [activity, setActivity] = useState('lightly-active"');
+  const [activity, setActivity] = useState('lightly-active');
   const [dailySteps, setDailySteps] = useState('');
   const [metric, setMetric] = useState(true);
-
-  // Metrics unit
-  let lbs = weight * 2.205;
-  let feet = height / 30.48;
 
   function handleGenderChange(gender) {
     setSelectedGender(gender);
@@ -63,8 +53,8 @@ function App() {
     setAge(event.target.value);
   }
 
-  function handleSelectedActivity(event) {
-    setActivity(activity);
+  function handleSelectedActivity(selectedActivity) {
+    setActivity(selectedActivity);
   }
 
   function handleSteps(event) {
@@ -75,70 +65,71 @@ function App() {
     setMetric(!metric);
   }
 
-  function preventNegativeValue() {
-    if (totalMetabolismLoose <= 0 || totalCarboLoose <= 0 || totalProteinLoose <= 0 || totalFatLoose <= 0) {
-      totalCarboLoose = 0;
-      totalCarboInGramsLoose = 0;
-      totalProteinLoose = 0;
-      totalProteinInGramsLoose = 0;
-      totalFatLoose = 0;
-      totalFatInGramsLoose = 0;
-      totalMetabolismLoose = 0;
-    }
-  }
-
+  // PREVENT SHOW ANY CONTENT WITHOUT INPUT DATA!
   function inputValueEmpty() {
     if (weight === '' || height === '' || age === '') {
-      restingMetabolism = dailyMetabolism = totalMetabolism = totalMetabolismGain = totalMetabolismLoose = 0;
-      totalCarbo = totalProtein = totalFat = totalCarboInGrams = totalProteinInGrams = totalFatInGrams = 0;
-      totalCarboGain = totalProteinGain = totalFatGain = totalCarboInGramsGain = totalProteinInGramsGain = totalFatInGramsGain = 0;
+      restingMetabolism = dailyMetabolism = totalMetabolism = 0;
+      totalCarbo = totalProtein = totalFat = 0;
+      totalCarboInGrams = totalProteinInGrams = totalFatInGrams = 0;
     }
   }
 
   // BASAL BMR FOR WOMAN AND MAN
 
+  let currentWeight, currentHeight;
+
   let weightHint = "kg";
   let heightHint = "cm";
   let distanceHint = "km";
+  let distance = 100;
 
   if (metric === true) {
     currentWeight = weight;
     currentHeight = height;
   } else {
-    currentWeight = lbs;
-    currentHeight = feet;
+    currentWeight = weight * 0.453592;
+    currentHeight = height * 30.48;
     weightHint = "lbs";
     heightHint = "feet";
     distanceHint = "miles";
+    distance = 150;
   }
 
   let men_BMR = 88.362 + (13.397 * currentWeight) + (4.799 * currentHeight) - (5.677 * age);
   let woman_BMR = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
 
-  // LEVEL OF ACTIVITY
+  // LEVEL OF ACTIVITY AND DAILY STEPS
   function handleActiveMetabolism(dailySteps) {
-    dailySteps = dailySteps * 0.04;
+
+    let steps = dailySteps * distance;
+
     if (activity === "lightly-active") {
       dailyMetabolism = restingMetabolism * 1.2;
-      totalMetabolism = dailyMetabolism + dailySteps;
+      totalMetabolism = dailyMetabolism + steps;
     } else if (activity === "moderately-active") {
-      dailyMetabolism = restingMetabolism * 1.4;
-      totalMetabolism = dailyMetabolism + dailySteps;
+      dailyMetabolism = restingMetabolism * 1.3;
+      totalMetabolism = dailyMetabolism + steps;
     } else if (activity === "very-active") {
-      dailyMetabolism = restingMetabolism * 1.6;
-      totalMetabolism = dailyMetabolism + dailySteps;
+      dailyMetabolism = restingMetabolism * 1.4;
+      totalMetabolism = dailyMetabolism + steps;
     } else if (activity === "extra-active") {
-      dailyMetabolism = restingMetabolism * 1.8;
-      totalMetabolism = dailyMetabolism + dailySteps;
+      dailyMetabolism = restingMetabolism * 1.5;
+      totalMetabolism = dailyMetabolism + steps;
     }
-    dailyMetabolism = Math.round(dailyMetabolism);
+
+    // ROUNDED CALCULATION RESULTS
     restingMetabolism = Math.round(restingMetabolism);
+    dailyMetabolism = Math.round(dailyMetabolism);
     totalMetabolism = Math.round(totalMetabolism);
-    totalMetabolismGain = Math.round(totalMetabolism + 300);
-    totalMetabolismLoose = Math.round(totalMetabolism - 500);
+
   }
 
   function calcMacro() {
+
+    let carbo = 4;
+    let protein = 4;
+    let fat = 9;
+
     totalCarbo = Math.round((totalMetabolism * 0.5));
     totalCarboInGrams = Math.round(totalCarbo / carbo);
 
@@ -148,23 +139,6 @@ function App() {
     totalFat = Math.round((totalMetabolism * 0.25));
     totalFatInGrams = Math.round(totalProtein / fat);
 
-    totalCarboGain = Math.round((totalMetabolismGain * 0.5));
-    totalCarboInGramsGain = Math.round(totalCarboGain / carbo);
-
-    totalProteinGain = Math.round((totalMetabolismGain * 0.25));
-    totalProteinInGramsGain = Math.round(totalProteinGain / protein);
-
-    totalFatGain = Math.round((totalMetabolismGain * 0.25));
-    totalFatInGramsGain = Math.round(totalProteinGain / fat);
-
-    totalCarboLoose = Math.round((totalMetabolismLoose * 0.5));
-    totalCarboInGramsLoose = Math.round(totalCarboLoose / carbo);
-
-    totalProteinLoose = Math.round((totalMetabolismLoose * 0.25));
-    totalProteinInGramsLoose = Math.round(totalProteinLoose / protein);
-
-    totalFatLoose = Math.round((totalMetabolismLoose * 0.25));
-    totalFatInGramsLoose = Math.round(totalProteinLoose / fat);
   }
 
   if (selectedGender === "male") {
@@ -173,14 +147,12 @@ function App() {
     handleActiveMetabolism(dailySteps);
     calcMacro();
     inputValueEmpty();
-    preventNegativeValue();
   } else if (selectedGender === "female") {
     restingMetabolism = woman_BMR;
     totalMetabolism = restingMetabolism;
     handleActiveMetabolism(dailySteps);
     calcMacro();
     inputValueEmpty();
-    preventNegativeValue();
   }
 
 
@@ -230,8 +202,9 @@ function App() {
 
         {/* MACROELEMENTS HINT'S */}
         <div className='macro-col-1'>
-          <p>Not recommended to take more than +300 kcal for mass gain</p>
-          <p>And less than -500 kcal for loss weight</p>
+          <p>Not recommended to take</p>
+          <p>more than +300 kcal for mass gain</p>
+          <p>or less than -500 kcal for loss weight</p>
 
         </div>
 
@@ -250,37 +223,11 @@ function App() {
 
       </div>
 
+      <p className='data-info'>All sent data is saved in the system only for communication purposes, this information will never be shared with a third party</p>
 
-      {/* <div className='makro-table'>
-        <MacroDemand
-          titleName="Gain weight"
-          totalKcal={totalMetabolismGain}
-          carboKcal={totalCarboGain}
-          carboGrams={totalCarboInGramsGain}
-          proteinKcal={totalProteinGain}
-          proteinGrams={totalProteinInGramsGain}
-          fatKcal={totalFatGain}
-          fatGrams={totalFatInGramsGain} />
-        <MacroDemand titleName="Keep weight"
-          totalKcal={totalMetabolism}
-          carboKcal={totalCarbo}
-          carboGrams={totalCarboInGrams}
-          proteinKcal={totalProtein}
-          proteinGrams={totalProteinInGrams}
-          fatKcal={totalFat}
-          fatGrams={totalFatInGrams} />
-        <MacroDemand titleName="Loose weight"
-          totalKcal={totalMetabolismLoose}
-          carboKcal={totalCarboLoose}
-          carboGrams={totalCarboInGramsLoose}
-          proteinKcal={totalProteinLoose}
-          proteinGrams={totalProteinInGramsLoose}
-          fatKcal={totalFatLoose}
-          fatGrams={totalFatInGramsLoose} />
-      </div> */}
-      {/* <p className='data-info'>All sent data is saved in the system only for communication purposes, this information will never be shared with a third party</p> */}
+      {/* SECTION INFO */}
+      <div className='section-info'>
 
-      {/* <div className='content-info'>
         <h1>CALORIC DEMAND CALCULATOR</h1>
         <p>
           The kcal calculator is a source of knowledge for people looking for a way to lose weight by running or who want to maintain the correct weight of a runner.
@@ -289,8 +236,10 @@ function App() {
           The given data allow the simplest way to create a balanced meal based on the calories consumed. Following the basic message during weight loss that the energy balance cannot be positive,
           i.e. we need to eat fewer calories in relation to the amount consumed during the day, our calculator will guide you through how to do it.
         </p>
-      </div> */}
 
+      </div>
+
+      {/* FOOTER */}
       <Footer />
     </div >
   );

@@ -1,6 +1,6 @@
 {
   "name": "caloric-demand-calculator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://CalvinLanger.io/Caloric-Demand-Calculator",
   "private": true,
   "dependencies": {
