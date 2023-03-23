@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Caloric-Demand-Calculator/static/css/main.0a911776.css",
+    "main.css": "/Caloric-Demand-Calculator/static/css/main.edecfb89.css",
     "main.js": "/Caloric-Demand-Calculator/static/js/main.d22c18e8.js",
     "static/js/787.4cf83b80.chunk.js": "/Caloric-Demand-Calculator/static/js/787.4cf83b80.chunk.js",
     "index.html": "/Caloric-Demand-Calculator/index.html",
-    "main.0a911776.css.map": "/Caloric-Demand-Calculator/static/css/main.0a911776.css.map",
+    "main.edecfb89.css.map": "/Caloric-Demand-Calculator/static/css/main.edecfb89.css.map",
     "main.d22c18e8.js.map": "/Caloric-Demand-Calculator/static/js/main.d22c18e8.js.map",
     "787.4cf83b80.chunk.js.map": "/Caloric-Demand-Calculator/static/js/787.4cf83b80.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0a911776.css",
+    "static/css/main.edecfb89.css",
     "static/js/main.d22c18e8.js"
   ]
 }
