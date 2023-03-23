@@ -39,14 +39,13 @@ html {
 
 body {
   overflow: -moz-hidden-unscrollable;
-  display: grid;
-  justify-content: center;
   width: 100%;
 }
 
 /* ALL PAGE CONTAINER */
 .wrapper{
- 
+  display: grid;
+  justify-content: center;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
