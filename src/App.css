@@ -90,7 +90,7 @@ body {
 
 input,
 select,
-button {
+.btn-metric button {
   padding: 0.8rem 1rem;
   font-size: 18px;
   letter-spacing: 0;
@@ -120,7 +120,7 @@ input {
   padding: 0.8rem 1rem;
 }
 
-button{
+.btn-metric button{
   background-color: #fff;
   border: 1px solid var(--light-green);
   color: var(--light-green);
@@ -145,8 +145,42 @@ button{
   justify-content: center;
 }
 
+.table-container {
+  display: grid;
+}
+
 .table-title{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   margin-bottom: 10px;
+}
+
+.kcal-preference {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.kcal-btn{
+  display: flex;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.kcal-btn svg {
+  font-size: 28px;
+  color: var(--light-green);
+}
+
+.table-output {
+  background-color: var(--light-grey);
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  padding: 0.2rem 2.2rem;
+  text-align: center;
+  width: 100px;
 }
 
 .table-section{
@@ -184,6 +218,7 @@ button{
 .section-info h1 {
   text-align: center;
   font-size: 2.5rem;
+  padding-bottom: 2.2rem;
   color: var(--light-green)
 }
 
@@ -212,20 +247,20 @@ button{
   font-size: 1.8rem;
 }
 
-.facebook-icon{
-  color: #4267B2;
+.linkedin-icon{
+  color: #0077b5;
 }
 
-.instagram-icon{
-  color: #fb3958;
+.telegram-icon{
+  color: #0088cc;
 }
 
 .github-icon{
   color: #212120;
 }
 
-.youtube-icon{
-  color: var(--youtube-color);
+.btc-logo {
+  color: #ffd700;
 }
 
 .facebook-icon,
@@ -233,4 +268,26 @@ button{
 .github-icon,
 .youtube-icon{
   cursor: pointer;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 900px) {
+  .subpage-title {
+    text-align: center;
+  }
+
+  .section-data {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-macro {
+    grid-template-columns: 1fr;
+    padding: 0.5rem 0 5rem;
+  }
+
+  .macro-col-1 {
+    display: none;
+  }
+
 }

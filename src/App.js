@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import './MediaQuerys.css';
 import InputData from './components/InputData';
 import Footer from './components/Footer';
 import OutputData from './components/OutputData';
@@ -24,7 +23,9 @@ function App() {
   const [activity, setActivity] = useState('lightly-active');
   const [dailySteps, setDailySteps] = useState('');
   const [metric, setMetric] = useState(true);
+  const [preferenceKcal, setPreferenceKcal] = useState(0);
 
+  // STATE FUNCTIONS
   function handleGenderChange(gender) {
     setSelectedGender(gender);
   }
@@ -64,6 +65,10 @@ function App() {
   function changeMetric() {
     setMetric(!metric);
   }
+
+  const handlePreferenceKcalChange = (preferenceKcal) => {
+    setPreferenceKcal(preferenceKcal);
+  };
 
   // PREVENT SHOW ANY CONTENT WITHOUT INPUT DATA!
   function inputValueEmpty() {
@@ -120,7 +125,7 @@ function App() {
     // ROUNDED CALCULATION RESULTS
     restingMetabolism = Math.round(restingMetabolism);
     dailyMetabolism = Math.round(dailyMetabolism);
-    totalMetabolism = Math.round(totalMetabolism);
+    totalMetabolism = Math.round(totalMetabolism + preferenceKcal);
 
   }
 
@@ -211,6 +216,7 @@ function App() {
         {/* MACROELEMENTS OUTPUT DATA */}
         <div className='macro-col-2'>
           <MacroDemand
+            onPreferenceChange={handlePreferenceKcalChange}
             titleName="Your Demands:"
             totalKcal={totalMetabolism}
             carboKcal={totalCarbo}

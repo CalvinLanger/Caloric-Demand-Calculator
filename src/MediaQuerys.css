@@ -1,6 +1,0 @@
-@media (max-width: 1230px) {
-    .makro-table {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 50px;
-    }
-}
