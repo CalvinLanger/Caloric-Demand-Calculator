@@ -44,6 +44,7 @@ body {
 /* ALL PAGE CONTAINER */
 .wrapper{
   display: grid;
+  width: 100%;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
