@@ -41,11 +41,12 @@ body {
   overflow: -moz-hidden-unscrollable;
   display: grid;
   justify-content: center;
+  width: 100%;
 }
 
 /* ALL PAGE CONTAINER */
 .wrapper{
-  display: grid;
+ 
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -292,4 +293,10 @@ input {
     display: none;
   }
 
+}
+
+@media (max-width: 650px) {
+  .subtitle p {
+    display: none;
+  }
 }
