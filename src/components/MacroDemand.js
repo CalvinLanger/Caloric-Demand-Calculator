@@ -29,6 +29,7 @@ function MacroDemand(props) {
 
     const handleResetBtnClick = (event) => {
         setPreferenceKcal(0);
+        props.onPreferenceChange(0);
         btnClicked(event);
     };
 
