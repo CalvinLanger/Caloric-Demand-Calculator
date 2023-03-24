@@ -44,7 +44,6 @@ body {
 /* ALL PAGE CONTAINER */
 .wrapper{
   display: grid;
-  width: 100%;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -294,6 +293,10 @@ input {
 }
 
 @media (max-width: 670px) {
+ .wrapper {
+    width: 100svh;
+  }
+
   .subtitle p {
     display: none;
   }
@@ -305,10 +308,11 @@ input {
   .footer {
     display: grid;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem;
   }
 
   .footer-logos {
     justify-content: center;
+    gap: 4rem;
   }
 }
