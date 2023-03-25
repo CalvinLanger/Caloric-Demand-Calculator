@@ -64,6 +64,9 @@ function App() {
 
   function changeMetric() {
     setMetric(!metric);
+    setWeight('');
+    setHeight('');
+    setDailySteps('');
   }
 
   const handlePreferenceKcalChange = (preferenceKcal) => {
